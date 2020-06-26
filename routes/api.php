@@ -1,5 +1,9 @@
 <?php
 
+header('Access-Control-Allow-Origin:  *');
+header('Access-Control-Allow-Methods:  POST, GET, OPTIONS, PUT, DELETE');
+header('Access-Control-Allow-Headers:  Content-Type, X-Auth-Token, Origin, Authorization');
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,10 +24,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('products', 'ProductController@index');
 
-Route::get('products/{id}', 'ProductController@show');
+Route::get('product/{id}', 'ProductController@show');
 
-Route::post('products', 'ProductController@store');
+Route::post('product', 'ProductController@store');
 
-Route::put('products', 'ProductController@store');
+Route::put('product', 'ProductController@edit');
 
-Route::delete('products', 'ProductController@destroy');
+Route::delete('product/{id}', 'ProductController@destroy');

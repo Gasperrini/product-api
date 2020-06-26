@@ -39,7 +39,16 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product = $request->isMethod('put') ? Product::findOrFail($request->product_id) : new Product;
+
+        $product->id = $request->input('product_id');
+        $product->sku = $request->input('sku');
+        $product->name = $request->input('name');
+        $product->price = $request->input('price');
+
+        if($product->save()){
+            return new ProductResource($product);
+        }
     }
 
     /**
@@ -50,7 +59,9 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = Product::findOrFail($id);
+
+        return new ProductResource($product);
     }
 
     /**
@@ -84,6 +95,10 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+
+        if($product->delete()){
+            return new ProductResource($product);
+        }
     }
 }

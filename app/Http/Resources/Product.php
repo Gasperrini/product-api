@@ -14,6 +14,20 @@ class Product extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        //return parent::toArray($request);
+
+        return [
+            'id' => $this->id,
+            'sku' => $this->sku,
+            'name' => $this->name,
+            'price' => $this->price
+        ];
+    }
+
+    public function with($request){
+        return [
+            'version' => '1.0.0',
+            'author_url' => url('https://github.com/gasperrini')
+        ];
     }
 }
